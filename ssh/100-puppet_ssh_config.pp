@@ -1,23 +1,14 @@
-# Puppet manifest to configure SSH client
+#!/usr/bin/env bash
+#Script to use puppet to make change on the config file
+
 include stdlib
-# Ensure the SSH client configuration file exists
-file { '/home/ubuntu/.ssh/config':
-  ensure => present,
-  owner  => 'ubuntu',
-  group  => 'ubuntu',
+file_line { 'private keyphers':
+ensure => present,
+path   => '/etc/ssh/ssh_config',
+line   => 'IdentityFile ~/.ssh/school',
 }
-
-# Configure SSH client to use the private key ~/.ssh/school
-file_line { 'Declare identity file':
-  ensure => present,
-  path   => '/home/ubuntu/.ssh/config',
-  line   => 'IdentityFile ~/.ssh/school',
+file_line { 'refuse authenticate using a password':
+ensure => present,
+path   => '/etc/ssh/ssh_config',
+line   => 'PasswordAuthentication no',
 }
-
-# Configure SSH client to refuse authentication using a password
-file_line { 'Turn off passwd auth':
-  ensure => present,
-  path   => '/home/ubuntu/.ssh/config',
-  line   => 'PasswordAuthentication no',
-}
-

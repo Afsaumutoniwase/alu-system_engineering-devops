@@ -12,8 +12,8 @@ frontend lb-frontend
         default_backend lb-backend
 backend lb-backend
         balance roundrobin
-        server web-01 54.226.255.15 check
-        server web-02 54.83.125.4 check
+        server web-01 54.91.52.217 check
+        server web-02 34.235.130.13 check
 " 
 | sudo tee -a /etc/haproxy/haproxy.cfg
 

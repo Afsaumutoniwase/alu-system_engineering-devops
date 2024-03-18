@@ -1,18 +1,12 @@
 #!/usr/bin/env bash
-# Start Apache so as to return a
-# page conatining Hello Holberton
-service apache2 start
+
+# Start Apache
+sudo systemctl start apache2
+
 # Check Apache service status
-if sudo service apache2 status | grep -q "apache2 is running"; then
-    echo "Apache is running"
+if sudo systemctl is-active --quiet apache2; then
+    echo "Apache2 is running"
 else
-    echo "Apache is not running"
+    echo "Apache2 is not running"
 fi
 
-# Query Apache root and check the output
-output=$(curl -s http://localhost:8080)
-if [[ "$output" == *"Hello Holberton"* ]]; then
-    echo "Apache root returns Hello Holberton"
-else
-    echo "Error: Apache root does not return Hello Holberton"
-fi

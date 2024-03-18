@@ -1,36 +1,5 @@
 #!/usr/bin/env bash
 # configures a server to listening on port 80 of all servers active IPv4 IPs
 
-#!/usr/bin/env bash
-
-# Check if script is being run as root
-if [ "$(id -u)" -ne 0 ]; then
-    echo "Please run this script as root"
-    exit 1
-fi
-
-# Check if nginx configuration file exists
-if [ ! -f "/etc/nginx/sites-available/default" ]; then
-    echo "Nginx configuration file not found: /etc/nginx/sites-available/default"
-    exit 1
-fi
-
-# Check if nginx service is installed
-if ! command -v nginx &> /dev/null; then
-    echo "Nginx is not installed. Please install Nginx and try again."
-    exit 1
-fi
-
-# Symlink the configuration file
-if ! sudo ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default; then
-    echo "Failed to create symlink to Nginx configuration file"
-    exit 1
-fi
-
-# Restart nginx service
-if ! sudo systemctl restart nginx; then
-    echo "Failed to restart Nginx service"
-    exit 1
-fi
-
-echo "Nginx configuration updated successfully. Port 80 is now listening."
+sudo ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+sudo service nginx restart

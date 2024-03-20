@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-#Making debugging short and sweet
 ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+service nginx start
 kill "$(pgrep 'nginx' | head -1)"
-if sudo service nginx status | grep -q "active (running)"; then echo "1"; else echo "* nginx is not running"; fi
+service nginx status | grep -q "active (running)" && echo "1" || echo "* nginx is not running"

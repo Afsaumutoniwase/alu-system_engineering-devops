@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
-#Making debugging short and sweet
+
+# Modify default configuration (consider creating a separate server block)
 sudo sed -i "s/8080/80/" /etc/nginx/sites-enabled/default
-service nginx start
-kill "$(pgrep 'nginx' | head -1)"
+sudo systemctl restart nginx
+
+#echo "" | sudo dd status=none of=/run/nginx.pid
